@@ -130,8 +130,8 @@ F5
 
 | Nome | Turma |
 |------|-------|
-| João Vinicius dos Santos Costa | 3°J |
-| Mateus Ricardo dos Santos | 3°J |
+| João Vinicius  | 3°J |
+
 
 ---
 
