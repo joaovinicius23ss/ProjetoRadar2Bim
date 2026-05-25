@@ -121,10 +121,10 @@ namespace ProjetoRadar2Bim
             Controls.Add(lblTecla);
             Controls.Add(lblStatus);
             Controls.Add(btnLimpar);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.Sizable;
             KeyPreview = true;
             Margin = new Padding(4, 3, 4, 3);
-            MaximizeBox = false;
+            MaximizeBox = true;
             Name = "Form1";
             Text = "Radar Meteorologico Estilizado - ICG 2 Bimestre";
             Load += Form1_Load;

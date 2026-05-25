@@ -167,29 +167,40 @@ namespace ProjetoRadar2Bim
         }
 
         // ==========================================================
+        // CIRCULO ponto a ponto usando a formula do professor
+        // ==========================================================
+        public void desenhaCirculo(Graphics g, Pen caneta, int cx, int cy, int r)
+        {
+            for (int a = 0; a < 360; a++)
+            {
+                int px = cx + (int)(r * Math.Cos(a * 3.15 / 180));
+                int py = cy + (int)(r * Math.Sin(a * 3.15 / 180));
+                pintaPonto(g, caneta, px, py);
+            }
+        }
+
+        // ==========================================================
         // CIRCULOS DO RADAR (decoracao da interface)
-        // Usando DrawEllipse com caneta solida preta
+        // Usando formula do professor ponto a ponto (DrawEllipse removido)
         // ==========================================================
         public void desenhaRadar(Graphics g)
         {
-            Pen canetaRadar = criaCaneta(0, 0, 0, 1);
+            Pen canetaCirculo = criaCaneta(0, 0, 0, 4); // espessura 3 para as circunferencias
+            Pen canetaCruz    = criaCaneta(0, 0, 0, 2); // espessura 1 para a cruz
 
             // 4 circulos concentricos
             int[] raios = { 50, 90, 130, 180 };
             foreach (int r in raios)
             {
-                g.DrawEllipse(canetaRadar,
-                    x - r, y - r,
-                    r * 2, r * 2);
+                desenhaCirculo(g, canetaCirculo, x, y, r);
             }
 
             // Cruz central (eixos horizontal e vertical)
-            // Linha horizontal
-            g.DrawLine(canetaRadar, x - raio, y, x + raio, y);
-            // Linha vertical
-            g.DrawLine(canetaRadar, x, y - raio, x, y + raio);
+            g.DrawLine(canetaCruz, x - raio, y, x + raio, y);
+            g.DrawLine(canetaCruz, x, y - raio, x, y + raio);
 
-            canetaRadar.Dispose();
+            canetaCirculo.Dispose();
+            canetaCruz.Dispose();
         }
 
         // ==========================================================
@@ -211,8 +222,6 @@ namespace ProjetoRadar2Bim
         // ==========================================================
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            // Fundo preto para o radar
-
             // 1) Desenha os circulos e eixos do radar
             desenhaRadar(e.Graphics);
 
@@ -307,7 +316,7 @@ namespace ProjetoRadar2Bim
             lblStatus.Text = "Clique no radar para definir o Ponto A.";
         }
 
-        // botão de limpar
+        // botï¿½o de limpar
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             frentes.Clear();
