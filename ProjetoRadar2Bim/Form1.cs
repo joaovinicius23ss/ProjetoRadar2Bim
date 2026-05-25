@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -36,7 +35,8 @@ namespace ProjetoRadar2Bim
             public int x1, y1, x2, y2;
             public int tipo; // 1 = Vermelha Tracejada | 2 = Azul Traco-ponto
         }
-        List<FrenteDeVento> frentes = new List<FrenteDeVento>();
+        FrenteDeVento[] frentes = new FrenteDeVento[100];
+        int qtdFrentes = 0;
 
         // ---------------------------------------------------------
         // Tecla pressionada no momento do clique
@@ -190,12 +190,12 @@ namespace ProjetoRadar2Bim
         // ==========================================================
         public void desenhaFrentes(Graphics g)
         {
-            foreach (FrenteDeVento f in frentes)
+            for (int i = 0; i < qtdFrentes; i++)
             {
-                if (f.tipo == 1)
-                    retaTracejada(g, f.x1, f.y1, f.x2, f.y2);
+                if (frentes[i].tipo == 1)
+                    retaTracejada(g, frentes[i].x1, frentes[i].y1, frentes[i].x2, frentes[i].y2);
                 else
-                    retaTracoPonto(g, f.x1, f.y1, f.x2, f.y2);
+                    retaTracoPonto(g, frentes[i].x1, frentes[i].y1, frentes[i].x2, frentes[i].y2);
             }
         }
 
@@ -278,7 +278,11 @@ namespace ProjetoRadar2Bim
                 nova.y2 = py2;
                 nova.tipo = teclaPressionada;
 
-                frentes.Add(nova);
+                if (qtdFrentes < 100)
+                {
+                    frentes[qtdFrentes] = nova;
+                    qtdFrentes++;
+                }
 
                 lblStatus.Text = "Frente de vento adicionada!";
 
@@ -301,7 +305,7 @@ namespace ProjetoRadar2Bim
         // bot�o de limpar
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            frentes.Clear();
+            qtdFrentes = 0;
             clickCount = 0;
             lblStatus.Text = "Frentes limpas. Clique no Ponto A.";
             pictureBox1.Invalidate();
