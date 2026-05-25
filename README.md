@@ -133,12 +133,4 @@ F5
 | João Vinicius dos Santos  | 3°J |
 | Mateus Ricardo dos Santos | 3°J |
 
----
 
-## 👨‍🏫 Professor
-
-**Wagner Santos C. de Jesus** — wagner@univap.br
-
----
-
-*Fundação Valeparaibana de Ensino — Colégios Univap*
