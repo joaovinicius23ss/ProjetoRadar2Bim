@@ -106,38 +106,20 @@ namespace ProjetoRadar2Bim
         // ==========================================================
         public void desenhafeixe(Graphics g)
         {
-            Color corInicio; // centro
-            Color corFim;    // ponta
+            // Cor solida por volta: Verde ou Preto, alterna a cada 360 graus
+            Color cor = feixeVerde ? criaCor(0, 255, 0) : criaCor(0, 0, 0);
+            Pen canetaFeixe = new Pen(cor, 4);
 
-            // Alterna cores a cada volta completa
-            if (feixeVerde)
-            {
-                corInicio = criaCor(0, 255, 0);   // Verde no centro
-                corFim = criaCor(0, 0, 0);     // Preto na ponta
-            }
-            else
-            {
-                corInicio = criaCor(0, 0, 0);     // Preto no centro
-                corFim = criaCor(0, 255, 0);   // Verde na ponta
-            }
-
-            // Desenha ponto a ponto ao longo do raio para criar gradiente
             for (int d = 0; d <= raio; d++)
             {
-                // Calcula proporcao ao longo do feixe (0 = centro, 1 = ponta)
-                float t = (float)d / raio;
-
-                // Interpola a cor
-                Color corPonto = interpolaCor(corInicio, corFim, t);
-                Pen canetaPonto = new Pen(corPonto, 4);
-
                 // Formula de rotacao do professor
                 int px = x + (int)(d * Math.Cos(angle * 3.15 / 180));
                 int py = y + (int)(d * Math.Sin(angle * 3.15 / 180));
 
-                pintaPonto(g, canetaPonto, px, py);
-                canetaPonto.Dispose();
+                pintaPonto(g, canetaFeixe, px, py);
             }
+
+            canetaFeixe.Dispose();
         }
 
         // ==========================================================
