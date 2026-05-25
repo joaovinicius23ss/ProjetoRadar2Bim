@@ -31,7 +31,7 @@ namespace ProjetoRadar2Bim
         // Lista de frentes de vento ja desenhadas
         // Cada entrada guarda: x1,y1,x2,y2,tecla (1 ou 2)
         // ---------------------------------------------------------
-        struct FrenteDeVento
+        class FrenteDeVento
         {
             public int x1, y1, x2, y2;
             public int tipo; // 1 = Vermelha Tracejada | 2 = Azul Traco-ponto
@@ -271,7 +271,7 @@ namespace ProjetoRadar2Bim
                 py2 = my;
                 clickCount = 0;
 
-                FrenteDeVento nova;
+                FrenteDeVento nova = new FrenteDeVento();
                 nova.x1 = px1;
                 nova.y1 = py1;
                 nova.x2 = px2;
